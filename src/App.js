@@ -6,7 +6,7 @@ import './App.css';
 
 function App() {
 	// session functions
-	const [ sessionLength, setSessionLength ] = useState(1500);
+	let [ sessionLength, setSessionLength ] = useState(1500);
 
 	const decrementSessionLengMinute = () => {
 		const newSessionLength = sessionLength - 60;
@@ -23,7 +23,7 @@ function App() {
 	};
 
 	//break functions
-	const [ breakLength, setBreakLength ] = useState(300);
+	let [ breakLength, setBreakLength ] = useState(300);
 
 	const decrementBreakLengMinute = () => {
 		const newBreakLength = breakLength - 60;
@@ -46,7 +46,7 @@ function App() {
 				decrementBreakLengMinute={decrementBreakLengMinute}
 				incrementBreakLengthMinute={incrementBreakLengthMinute}
 			/>
-			<TimeLeft sessionLength={sessionLength} />
+			<TimeLeft sessionLength={sessionLength} breakLength={breakLength} />
 			<Session
 				sessionLength={sessionLength}
 				decrementSessionLengMinute={decrementSessionLengMinute}
