@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Break from './components/break';
 import Session from './components/session';
 import TimeLeft from './components/timeLeft';
 import './App.css';
 
 function App() {
+	let audioElement = useRef(null);
 	// session functions
+	let [ currentSessionType, setCurrentSessionType ] = useState('Session');
+	let [ intervalId, setIntervalId ] = useState(null);
 	let [ sessionLength, setSessionLength ] = useState(1500);
+	let [ breakLength, setBreakLength ] = useState(300);
+	let [ timeLeft, setTimeLeft ] = useState(sessionLength);
+
+	//set clock to adjusted session length
+	useEffect(
+		() => {
+			setTimeLeft(sessionLength);
+		},
+		[ sessionLength ]
+	);
 
 	const decrementSessionLengMinute = () => {
 		const newSessionLength = sessionLength - 60;
@@ -23,7 +36,6 @@ function App() {
 	};
 
 	//break functions
-	let [ breakLength, setBreakLength ] = useState(300);
 
 	const decrementBreakLengMinute = () => {
 		const newBreakLength = breakLength - 60;
@@ -39,6 +51,52 @@ function App() {
 		setBreakLength(breakLength + 60);
 	};
 
+	//Start/stop button
+	let isStarted = intervalId != null;
+	let handleStart = () => {
+		if (isStarted) {
+			//stop clock countdown
+			clearInterval(intervalId);
+			setIntervalId(null);
+		} else {
+			//have clock count down
+			let newIntervalId = setInterval(() => {
+				setTimeLeft((prevTimeLeft) => {
+					const newTimeLeft = prevTimeLeft - 1;
+					if (newTimeLeft >= 0) {
+						return prevTimeLeft - 1;
+					}
+					//play audio at 0
+					audioElement.current.play();
+					//switch between break and session
+					//if session
+					if (currentSessionType === 'Session') {
+						setCurrentSessionType('Break');
+						//set timer to break time
+						setTimeLeft(breakLength);
+						//if break
+					} else if (currentSessionType === 'Break') {
+						//set timer to session
+						setCurrentSessionType('Session');
+						setTimeLeft(sessionLength);
+					}
+				});
+			}, 1000);
+			setIntervalId(newIntervalId);
+		}
+	};
+
+	//reset button
+	const handleReset = () => {
+		audioElement.current.load();
+		clearInterval(intervalId);
+		setIntervalId(null);
+		setCurrentSessionType('Session');
+		setSessionLength(60 * 25);
+		setBreakLength(60 * 5);
+		setTimeLeft(60 * 25);
+	};
+
 	return (
 		<div className="App">
 			<Break
@@ -46,12 +104,23 @@ function App() {
 				decrementBreakLengMinute={decrementBreakLengMinute}
 				incrementBreakLengthMinute={incrementBreakLengthMinute}
 			/>
-			<TimeLeft sessionLength={sessionLength} breakLength={breakLength} />
+			<TimeLeft
+				handleStart={handleStart}
+				timerLabel={currentSessionType}
+				startStopLabel={isStarted ? 'STOP' : 'START'}
+				timeLeft={timeLeft}
+			/>
 			<Session
 				sessionLength={sessionLength}
 				decrementSessionLengMinute={decrementSessionLengMinute}
 				incrementSessionLengthMinute={incrementSessionLengthMinute}
 			/>
+			<button id="reset" onClick={handleReset}>
+				RESET
+			</button>
+			<audio id="beep" ref={audioElement}>
+				<source src="https://www.fesliyanstudios.com/play-mp3/4386" type="audio/mpeg" />
+			</audio>
 		</div>
 	);
 }
