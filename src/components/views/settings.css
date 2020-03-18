@@ -1,0 +1,36 @@
+.settings {
+	padding: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
+}
+
+.settings button {
+	font-size: 1.5rem;
+	font-weight: 700;
+	/* padding: 1rem; */
+	background-color: #8d8741;
+	border-radius: 50%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	border: none;
+	display: block;
+	height: 4rem;
+	width: 4rem;
+	margin: 2rem;
+}
+
+.settings p {
+	font-weight: 700;
+	font-size: 1.5rem;
+	margin: .3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
+}

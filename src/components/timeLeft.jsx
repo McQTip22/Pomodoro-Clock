@@ -1,20 +1,26 @@
 import React from 'react';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
+import './views/clock.css';
 
 momentDurationFormatSetup(moment);
 
-const TimeLeft = ({ handleStart, timerLabel, startStopLabel, timeLeft }) => {
+const TimeLeft = ({ handleStart, timerLabel, startStopLabel, timeLeft, handleReset }) => {
 	//format clock to 00:00
 	let formattedTimeLeft = moment.duration(timeLeft, 's').format('mm:ss', { trim: false });
 
 	return (
-		<div>
-			<p id="timer-label">{timerLabel}</p>
+		<div class="clock">
+			<h1 id="timer-label">{timerLabel}</h1>
 			<p id="time-left">{formattedTimeLeft}</p>
-			<button id="start_stop" onClick={handleStart}>
-				{startStopLabel}
-			</button>
+			<div className="btns">
+				<button id="start_stop" onClick={handleStart}>
+					{startStopLabel}
+				</button>
+				<button id="reset" onClick={handleReset}>
+					RESET
+				</button>
+			</div>
 		</div>
 	);
 };

@@ -24,8 +24,8 @@ function App() {
 	const decrementSessionLengMinute = () => {
 		const newSessionLength = sessionLength - 60;
 
-		if (newSessionLength < 0) {
-			setSessionLength(0);
+		if (newSessionLength <= 1) {
+			setSessionLength(1);
 		} else {
 			setSessionLength(newSessionLength);
 		}
@@ -40,8 +40,8 @@ function App() {
 	const decrementBreakLengMinute = () => {
 		const newBreakLength = breakLength - 60;
 
-		if (newBreakLength < 0) {
-			setBreakLength(0);
+		if (newBreakLength <= 1) {
+			setBreakLength(1);
 		} else {
 			setBreakLength(newBreakLength);
 		}
@@ -98,7 +98,7 @@ function App() {
 	};
 
 	return (
-		<div className="App">
+		<div class="container">
 			<Break
 				breakLength={breakLength}
 				decrementBreakLengMinute={decrementBreakLengMinute}
@@ -109,15 +109,14 @@ function App() {
 				timerLabel={currentSessionType}
 				startStopLabel={isStarted ? 'STOP' : 'START'}
 				timeLeft={timeLeft}
+				handleReset={handleReset}
 			/>
 			<Session
 				sessionLength={sessionLength}
 				decrementSessionLengMinute={decrementSessionLengMinute}
 				incrementSessionLengthMinute={incrementSessionLengthMinute}
 			/>
-			<button id="reset" onClick={handleReset}>
-				RESET
-			</button>
+
 			<audio id="beep" ref={audioElement}>
 				<source src="https://www.fesliyanstudios.com/play-mp3/4386" type="audio/mpeg" />
 			</audio>

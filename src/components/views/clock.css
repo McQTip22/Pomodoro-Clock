@@ -1,0 +1,47 @@
+.clock {
+	padding: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
+	font-weight: 700;
+	font-size: 1.5rem;
+	margin: 3rem;
+}
+
+.clock .btns {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	text-align: center;
+}
+
+.clock .btns button {
+	margin: 2rem;
+	font-size: 1.1rem;
+	font-weight: 700;
+	border: none;
+	background-color: #8d8741;
+	border-radius: 1rem;
+	padding: 1.5rem;
+	color: white;
+}
+
+#time-left {
+	background-color: #1a1a1d;
+	border-style: solid;
+	border-color: #4a4e50;
+	border-radius: 1rem;
+	padding: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
+	font-weight: 700;
+	font-size: 3rem;
+	margin: 3rem;
+	color: #c3073f;
+}
