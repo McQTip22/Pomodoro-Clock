@@ -25,7 +25,7 @@ function App() {
 		const newSessionLength = sessionLength - 60;
 
 		if (newSessionLength <= 1) {
-			setSessionLength(1);
+			setSessionLength(60);
 		} else {
 			setSessionLength(newSessionLength);
 		}
@@ -41,7 +41,7 @@ function App() {
 		const newBreakLength = breakLength - 60;
 
 		if (newBreakLength <= 1) {
-			setBreakLength(1);
+			setBreakLength(60);
 		} else {
 			setBreakLength(newBreakLength);
 		}
