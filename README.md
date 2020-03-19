@@ -2,7 +2,7 @@
 
 ## Installation
 
-npm install moment moment-duration-format
+`npm install moment moment-duration-format`
 
 ## Support and Ownership
 
