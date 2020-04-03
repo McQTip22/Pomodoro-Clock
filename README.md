@@ -2,7 +2,11 @@
 
 ## Installation
 
-`npm install moment moment-duration-format`
+`npm seteup`
+
+## Usage
+
+`npm start`
 
 ## Support and Ownership
 
