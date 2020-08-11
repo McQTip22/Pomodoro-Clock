@@ -2,7 +2,7 @@
 
 ## Installation
 
-`npm seteup`
+`npm install`
 
 ## Usage
 
